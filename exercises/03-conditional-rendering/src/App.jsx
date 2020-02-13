@@ -1,9 +1,10 @@
 import React from "react";
-// import something
-// import another thing
+import todos from "./data/todos";
+import ToDo from "./components/ToDo/ToDo";
 
+console.log(ToDo);
 function App() {
-  return <div className="App">{/* complete me */}</div>;
+  return <div className="App">{<ToDo todos={todos} showCompleted={true} />}</div>;
 }
 
 export default App;
