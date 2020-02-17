@@ -3,8 +3,13 @@ import images from "./images/images";
 import "./App.css";
 
 function App() {
-  console.log(images);
-  return <div className="App">' '</div>;
+  return (
+    <div className="App">
+      {images.map((image, index) => (
+        <img src={image} alt='item'/>
+      ))}
+    </div>
+  );
 }
 
 export default App;
