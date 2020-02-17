@@ -1,9 +1,10 @@
 import React from "react";
-// import something
+import images from "./images/images";
 import "./App.css";
 
 function App() {
-  return <div className="App">{/* complete me */}</div>;
+  console.log(images);
+  return <div className="App">' '</div>;
 }
 
 export default App;
