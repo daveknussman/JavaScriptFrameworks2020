@@ -1,10 +1,50 @@
-import React, { useState } from "react";
+import React , { useState } from "react";
+// import React  from "react";
 import "./App.css";
-// Import data from "assets/countries.json" and "assets/states.json" here
+import countries from "./assets/countries.json";
+import states from "./assets/states.json";
 
 function App() {
+
+  const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    country: ""
+  });
+
+  const handleSubmit = e => {
+    /**
+     * Adds or updates based on the HTML elements name.
+     */
+    e.preventDefault();
+
+    console.log(e.target);
+    // Object.entries((e.target).forEach(([key, value]) => {console.log(`${key} ${value}`);
+    // e.target.forEach((item) => {console.log(item)});
+
+    // alert('before');
+    // console.log(values);
+    // setValues({
+    //   ...values,
+    //   [e.target.name]: e.target.value
+    // });
+
+    //     setValues({});
+    // alert('after');
+    // console.log(values);
+   }
+
+  // console.log(countries);
+  // console.log(states);
+  // let state = 'NY';
+  // let country = 'Aruba';
+  //
   return (
-    <form className="container mt-4">
+    <form onSubmit={handleSubmit} className="container mt-4">
       {/* You will need to handle form submission */}
       <div className="form-group">
         <label htmlFor="firstName" className="control-label">
@@ -54,8 +94,10 @@ function App() {
           State / Province / Region
         </label>
         {/* Loop through the states you imported here */}
-        <select id="state" name="state" className="form-control" />
-      </div>
+        <select id="state" name="state" className="form-control" > {/*value={state}*/}
+          {states.map(item => <option key={item} value={item}>{item}</option>)}/>
+        </select>
+         </div>
 
       <div className="form-group">
         <label htmlFor="postalCode" className="control-label">
@@ -74,7 +116,9 @@ function App() {
           Country
         </label>
         {/* Loop through the countries you imported here */}
-        <select id="country" name="country" className="form-control" />
+        <select id="country" name="country" className="form-control">  {/*value={country}*/}
+           {countries.map(item => <option key={item} value={item}>{item}</option>)}/>
+        </select>
       </div>
       <button type="submit" className="btn btn-primary">
         Submit
