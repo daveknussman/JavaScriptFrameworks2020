@@ -4,6 +4,7 @@ import "./App.css";
 const GroceryList = () => {
 
   const [groceryList, setGroceryList] = useState([]);
+
   const addItem = e => {
     e.preventDefault();
     ((newItem !== ' ') && (newCost > 0)) ? setGroceryList([...groceryList, {'item':newItem, 'cost':newCost}]) : alert('Grocery Item and Cost are required to add item to list');
@@ -34,8 +35,6 @@ const GroceryList = () => {
     setTotalCost(0);
     // setTotalCost(0,groceryList.forEach(item => totalCost + item.cost));
   }
-
-  const [totalCost, setTotalCost] = useState(0);
 
   return (
     <div className="container">

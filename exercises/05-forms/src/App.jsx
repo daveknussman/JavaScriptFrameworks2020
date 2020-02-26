@@ -6,6 +6,7 @@ import states from "./assets/states.json";
 
 function App() {
 
+  // Values changing on screen
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -15,34 +16,24 @@ function App() {
     zipcode: "",
     country: ""
   });
+  const handleChange = e => {
+      // console.log(e.target);
+      // the set values is setting an object (which will be values becuase of the useState above) by doing a spread on values to make a copy of the object to retain whats already in there and then creating/updating the item with what is being passed
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value
+    });
+  }
 
+  // form submitting 
+  const [displayResults, setDisplayResults] = useState(false);
   const handleSubmit = e => {
-    /**
-     * Adds or updates based on the HTML elements name.
-     */
     e.preventDefault();
+    console.log(values);
+    setDisplayResults(true);
+  };
 
-    console.log(e.target);
-    // Object.entries((e.target).forEach(([key, value]) => {console.log(`${key} ${value}`);
-    // e.target.forEach((item) => {console.log(item)});
 
-    // alert('before');
-    // console.log(values);
-    // setValues({
-    //   ...values,
-    //   [e.target.name]: e.target.value
-    // });
-
-    //     setValues({});
-    // alert('after');
-    // console.log(values);
-   }
-
-  // console.log(countries);
-  // console.log(states);
-  // let state = 'NY';
-  // let country = 'Aruba';
-  //
   return (
     <form onSubmit={handleSubmit} className="container mt-4">
       {/* You will need to handle form submission */}
@@ -55,6 +46,8 @@ function App() {
           name="firstName"
           type="text"
           className="form-control"
+          value={values.firstName}
+          onChange={handleChange}
         />
       </div>
       <div className="form-group">
@@ -66,6 +59,8 @@ function App() {
           name="lastName"
           type="text"
           className="form-control"
+          value={values.lastName}
+          onChange={handleChange}
         />
       </div>
       <div className="form-group">
@@ -77,6 +72,8 @@ function App() {
           name="addressLine1"
           type="text"
           className="form-control"
+          value={values.address}
+          onChange={handleChange}
         />
         <p className="help-block text-muted">
           Street Address, P.O. Box, Company Name, C/O
@@ -87,14 +84,16 @@ function App() {
         <label htmlFor="city" className="control-label">
           City / Town
         </label>
-        <input id="city" name="city" type="text" className="form-control" />
+        <input id="city" name="city" type="text" className="form-control" value={values.city}
+          onChange={handleChange}/>
       </div>
       <div className="form-group">
         <label htmlFor="state" className="control-label">
           State / Province / Region
         </label>
         {/* Loop through the states you imported here */}
-        <select id="state" name="state" className="form-control" > {/*value={state}*/}
+        <select id="state" name="state" className="form-control" value={values.state}
+          onChange={handleChange}> 
           {states.map(item => <option key={item} value={item}>{item}</option>)}/>
         </select>
          </div>
@@ -108,6 +107,8 @@ function App() {
           name="postalCode"
           type="text"
           className="form-control"
+          value={values.postalCode}
+          onChange={handleChange}
         />
       </div>
 
@@ -116,7 +117,8 @@ function App() {
           Country
         </label>
         {/* Loop through the countries you imported here */}
-        <select id="country" name="country" className="form-control">  {/*value={country}*/}
+        <select id="country" name="country" className="form-control" value={values.country}
+          onChange={handleChange}>  
            {countries.map(item => <option key={item} value={item}>{item}</option>)}/>
         </select>
       </div>
@@ -128,11 +130,13 @@ function App() {
        * Find a way to only display this once the form has been submitted.
        * Hint: You will need to change "false" below with something else
        */}
-      {false && (
+      {displayResults && (
         <div className="card card-body bg-light mt-4 mb-4">
           Results:
           <ul className="list-unstyled mb-0">
-            {/* Add <li></li> tags here */}
+            {Object.values(values).map((value, idx) => {
+              return <li key={`value-${idx}`}>{value}</li>;
+            })}
           </ul>
         </div>
       )}
