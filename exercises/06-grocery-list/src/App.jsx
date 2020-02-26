@@ -6,11 +6,13 @@ const GroceryList = () => {
   const [groceryList, setGroceryList] = useState([]);
 
   const [totalCost, setTotalCost] = useState(0);
-  
-  const addItem = e => {
+
+  const handleSubmit = e => {
     e.preventDefault();
     ((newItem !== ' ') && (newCost > 0)) ? setGroceryList([...groceryList, {'item':newItem, 'cost':newCost}]) : alert('Grocery Item and Cost are required to add item to list');
     setTotalCost(totalCost + newCost);
+    setNewItem('');
+    setNewCost('');
     // setTotalCost(0,groceryList.forEach(item => totalCost + item.cost));
   }
 
@@ -22,12 +24,12 @@ const GroceryList = () => {
     // setTotalCost(0,groceryList.forEach(item => totalCost + item.cost));
   }
 
-  const [newItem, setNewItem] = useState(' ');
+  const [newItem, setNewItem] = useState('');
   const handleItemChange = e => {
     setNewItem(e.target.value);
   }
 
-  const [newCost, setNewCost] = useState(0);
+  const [newCost, setNewCost] = useState('');
   const handleCostChange = e => {
     setNewCost(Number(e.target.value));
   }
@@ -41,15 +43,16 @@ const GroceryList = () => {
    return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
-        <form className="form-inline">
+        {/* added onSubmit as the event handler for form being submitted and add button clicking.  This is better because the state and handler is on form and not the button.  This works since the add button is of type submit on the form */}
+        <form className="form-inline" onSubmit={handleSubmit}>
           <input
             className="form-control"
             type="text"
             placeholder="Name of grocery item..."
             aria-label="Name of grocery item..."
             onChange={handleItemChange}
-            // value={addNewItem}
-            name='addNewItem'
+            value={newItem}
+            // name='addNewItem'
           />
           <input
             className="form-control"
@@ -59,11 +62,12 @@ const GroceryList = () => {
             placeholder="Cost of grocery Item..."
             aria-label="Cost of grocery Item..."
             onChange={handleCostChange}
-            // value={addNewCost}
-            name='addNewCost'
+            value={newCost}
+            // name='addNewCost'
           />
           <div>
-            <button type="submit" className="btn btn-success" onClick={addItem}>
+          {/* removed onClick on button and handling on for using onSubmit as the event.  This works since the add button is of type submit on the form */}
+            <button type="submit" className="btn btn-success">
               Add
             </button>
           </div>
