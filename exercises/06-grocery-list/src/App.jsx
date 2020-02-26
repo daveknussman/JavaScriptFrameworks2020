@@ -5,6 +5,8 @@ const GroceryList = () => {
 
   const [groceryList, setGroceryList] = useState([]);
 
+  const [totalCost, setTotalCost] = useState(0);
+  
   const addItem = e => {
     e.preventDefault();
     ((newItem !== ' ') && (newCost > 0)) ? setGroceryList([...groceryList, {'item':newItem, 'cost':newCost}]) : alert('Grocery Item and Cost are required to add item to list');
@@ -36,7 +38,7 @@ const GroceryList = () => {
     // setTotalCost(0,groceryList.forEach(item => totalCost + item.cost));
   }
 
-  return (
+   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
         <form className="form-inline">
