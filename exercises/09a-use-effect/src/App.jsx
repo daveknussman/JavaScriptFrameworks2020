@@ -1,17 +1,28 @@
 // Import useEffect here
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import "./App.css";
-// import Axios (or use Fetch)
+import axios from "axios";
 
 function App() {
   /**
    * Set up your state
    */
-
+  const [quote, setQuote] = useState('Loading...');
   /**
    * Make an AJAX call with the useEffect hook
    */
-
+  useEffect(() => {
+    axios("https://ron-swanson-quotes.herokuapp.com/v2/quotes") 
+    // wrong URL below for testing error condition trapping in the catch
+    // axios("https://ron-swanson-quotes.herokuapp.com/v2/quottes") 
+      .then(response => {
+        // console.log(response.data[0]); 
+        setQuote(response.data[0]);
+      })
+      .catch(() => {
+        setQuote('Error loading API data'); 
+      });
+  }, []); 
   return (
     <body class="bg-warning text-center">
     <img
@@ -22,13 +33,12 @@ function App() {
       class="mt-4"
     />
     <div class="container">
-      {/* Display a loading message */}
       {/* Display an error message if the API fails */}
       <blockquote
         id="quote"
         class="blockquote bg-dark text-white border-0 mb-4"
       >
-        {/* Complete me */}
+        {quote}
       </blockquote>
     </div>
   </body>
