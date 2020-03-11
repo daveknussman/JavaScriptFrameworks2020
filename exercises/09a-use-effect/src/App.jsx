@@ -18,10 +18,16 @@ function App() {
       .then(response => {
         // console.log(response.data[0]); 
         setQuote(response.data[0]);
+
       })
       .catch(() => {
         setQuote('Error loading API data'); 
       });
+      // console.log("next call");
+      // axios("https://michael-scott-quotes.herokuapp.com/quote") 
+      //   .then(response => {
+      //     console.log(response); 
+      //   });
   }, []); 
   return (
     <body class="bg-warning text-center">
