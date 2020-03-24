@@ -21,7 +21,8 @@ function Category(props) {
    * Category is hardcoded here.
    * This is the only part you will need to change in this file.
    */
-  const category = "office"; // change me
+  // const category = "office"; // change me
+  const category = props.match.params.name;
   /**
    * All the products in a category. To see how this works, take a look at
    * @see exercises/10-react-router/src/assets/inventory.js
