@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class LessText extends Component {
     state = {
       lengthOfText: this.props.maxLength //this does work (giving me less reason to deconstruct if i cant access the deconstructd value to set initial value)
-      //lengthOfText: maxLength //This doesnt work even though i deconstructed
+      //lengthOfText: maxLength //This doesnt work even though i deconstructed because of closures
     };
 
     setLength = (len) => {
