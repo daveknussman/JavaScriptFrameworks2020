@@ -13,6 +13,7 @@ import * as serviceWorker from "./serviceWorker";
 
 /**
  * Change this line.
+ * Had to wrap App with BrowserRouter to have App use the router functionality 
  */
 ReactDOM.render(
     <BrowserRouter>

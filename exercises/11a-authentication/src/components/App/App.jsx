@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoggedInContent from "../LoggedInContent/LoggedInContent";
-// You may need to import additional things here
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function App() {
   /**
@@ -21,28 +22,63 @@ function App() {
   /**
    * You may need to add more things to state
    */
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
   const login = token => {
     /**
      * Complete me
      */
+    localStorage.setItem("token", token);
+    // also doing token as Cookie
+    Cookies.set("tokenCookie",token, { expires: 1 });
+    setIsLoading(false);
+    setIsLoggedIn(true);
+    setErrorMessage(null);
   };
 
   const logout = () => {
     /**
      * Complete me
      */
+    localStorage.removeItem("token");
+    // as Cookie
+    Cookies.remove("tokenCookie");
+    setIsLoggedIn(false);
   };
 
   const handleLoginRequest = e => {
-    /**
-     * Complete me.
-     */
+    setIsLoading(true);
+    e.preventDefault();
+    axios({
+      url: "http://localhost:7000/jwt/login",
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      //     "Accept": "applictation/json"
+      },
+      data: {
+        "username": username,
+        "password": password
+      }
+          })
+    .then((response) => {
+      login(response.data.token);
+      // alert('hello');
+    })
+    .catch((err) => {
+      // alert(err);
+      setIsLoading(false);
+      setErrorMessage(err.message);
+    });
+    
   };
 
   /**
    * If the user is logged in, you should render the <LoggedInContent /> component instead.
    */
+  if (isLoggedIn) {
+    return <LoggedInContent logout={logout}/>;
+  } else 
   return (
     <div className="container mt-2 mb-5">
       <h1>Login</h1>

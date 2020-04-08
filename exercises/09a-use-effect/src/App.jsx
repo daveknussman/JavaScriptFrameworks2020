@@ -23,11 +23,11 @@ function App() {
       .catch(() => {
         setQuote('Error loading API data'); 
       });
-      // console.log("next call");
-      // axios("https://michael-scott-quotes.herokuapp.com/quote") 
-      //   .then(response => {
-      //     console.log(response); 
-      //   });
+      console.log("next call");
+      axios("https://michael-scott-quotes.herokuapp.com/quote") 
+        .then(response => {
+          console.log(response); 
+        });
   }, []); 
   return (
     <body class="bg-warning text-center">
