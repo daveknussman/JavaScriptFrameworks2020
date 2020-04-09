@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+html,
+body,
+#root,
+.cover {
+  height: 100%;
+}
+.blockquote {
+  border-radius: 5px;
+  font-family: "Kavivanar", cursive;
+}
+.error {
+  border-radius: 5px;
+  font-family: "Syncopate", sans-serif;
+}
+.btn-outline-secondary {
+  background-color: #fff;
+}
