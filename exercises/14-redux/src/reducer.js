@@ -9,7 +9,8 @@ const reducer = (
     count: 0,
     isVisible: false,
     color:' ',
-    todos: ["Finish this assignment", "Read a book"]
+    todos: ["Finish this assignment", "Read a book"] 
+    // todoInput
   },
   action
 ) => {
@@ -49,11 +50,20 @@ const reducer = (
               color: "green"
             };
           case types.ADD_TODO:
-            console.log(state);
+            // console.log(state);
             return {
               ...state,
-              todos: [...state.todos, this.props.todoInput]
+              // todos: [...state.todos, this.props.todoInput]
+              // todos: [...state.todos, "new ToDo"]
+              todos: [...state.todos, state.todoInput],
+              todoInput:  ""
             };                    
+            case types.SET_INPUT:
+              return {
+                ...state,
+                todoInput:action.todoInput
+              };
+  
     default:
       return state;
   }

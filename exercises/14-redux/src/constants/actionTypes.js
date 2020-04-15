@@ -5,6 +5,7 @@ export const SET_RED = "SET_RED";
 export const SET_YELLOW = "SET_YELLOW";
 export const SET_GREEN = "SET_GREEN";
 export const ADD_TODO = "ADD_TODO";
+export const SET_INPUT = "SET_INPUT";
 /**
  * Add more action types here
  */

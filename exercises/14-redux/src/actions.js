@@ -37,7 +37,10 @@ export const pickColor = color => {
 };
 
 export const setInput = todoInput => {
-
+  return {
+    type: types.SET_INPUT,
+    todoInput:todoInput
+  };
 };
 
 export const addTodo = () => {
